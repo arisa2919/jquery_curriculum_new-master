@@ -31,7 +31,7 @@
       // .addClass() クラスを追加します。
       // .removeClass() クラスを削除します。
       $(function () {
-        $('.nav').find('li').on('click', tab)
+        $('.nav').children('li').on('click', tab)
         function tab() {
           let index = $(this).index();
           $('.contents li').addClass('is-hidden')
