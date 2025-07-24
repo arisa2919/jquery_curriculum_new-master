@@ -107,12 +107,12 @@
           if (selectValue === 'all') {
             $(".list").find("li").show(); 
           } else {
-            $(".list").find("li").each(function () {
-              const categoryType = $(this).data('category-type');
+            $(".list").find("li").each(function (index, element) {
+              const categoryType = $(element).data('category-type');
               if (selectValue === categoryType) {
-                $(this).show();
+                $(element).show();
               } else {
-                $(this).hide();
+                $(element).hide();
               }
             });
           }
