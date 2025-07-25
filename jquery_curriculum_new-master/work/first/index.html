@@ -57,7 +57,7 @@
     });
 // 第3問  id='q3'の要素をクリックしたらこの要素の前後とこの要素内の前後にテキストを挿入せよ。
     $('#q3').on('click', text);
-    function text() {
+    function insertText() {
       $(this).prepend('DOMの中の前')
              .append('DOMの中の後')
              .before('DOMの前')
