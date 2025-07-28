@@ -29,11 +29,13 @@
             method: 'GET'
           }).done(function(profile) { 
             const japaneseName = profile.names.find(name => name.language.name === 'ja').name;
+            const pokemonImage = res.sprites.front_default;
+            const pokemonName = res.name;
             let encountHtml =
             `
               <p class="name">${japaneseName}</p>
               <div>
-                <img class="img" src="${res.sprites.front_default}" alt="${res.name}">
+                <img class="img" src="${pokemonImage}" alt="${pokemonName}">
               </div>
               <div>
                 <button class="btn" id="catch">捕まえる</button>
@@ -60,11 +62,12 @@
               url: 'https://pokeapi.co/api/v2/item/4',
               method: 'GET'
             }).done(function(monsterBallRes) { 
+              monsterBallImage = monsterBallRes.sprites.default;
               let doneHtml = 
               `
                 <p class="name">ゲットしました</p>
                 <div>
-                  <img class="img" src="${monsterBallRes.sprites.default}" alt="モンスターボール">
+                  <img class="img" src="${monsterBallImage}" alt="モンスターボール">
                 </div>
                 <button class="btn" data-js="reset">戻る</button>
               `
