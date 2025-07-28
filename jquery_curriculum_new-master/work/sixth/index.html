@@ -17,9 +17,9 @@
   <script>
     // 回答はここに書いてね
     $(function() {
-      $('#pokemon_search').on('click', searchPokemon);
+      $('#wrapper').on('click', '#pokemon_search', searchPokemon);
       function searchPokemon() { 
-        const pokemonId = Math.floor(Math.random() * 151) + 1;;
+        const pokemonId = Math.floor(Math.random() * 151) + 1;
         $.ajax({ 
           url: `https://pokeapi.co/api/v2/pokemon/${pokemonId}/`,
           method: 'GET'
@@ -47,37 +47,41 @@
 
       $('#wrapper').on('click', '#catch', catchPokemon);
       function catchPokemon() {
-        $.ajax({ 
-          url: 'https://pokeapi.co/api/v2/item/4',
-          method: 'GET'
-        }).done(function(monsterBall) { 
-          const random = Math.random();
+        const random = Math.random();
           if (random < 0.5) {
-            let doneHtml = 
-            `
-              <p class="name">ゲットしました</p>
-              <div>
-                <img class="img" src="${monsterBall.sprites.default}" alt="モンスターボール">
-              </div>
-              <button class="btn" data-js="reset">戻る</button>
-            `
-            $('#wrapper').html(doneHtml);
-          } else {
             let failHtml =
             `
               <p class="text">逃げられてしまった...</p>
               <button class="btn mt" data-js="reset">戻る</button>
             `
             $('#wrapper').html(failHtml); 
-          }
-        })
-      } 
+          } else {
+            $.ajax({ 
+              url: 'https://pokeapi.co/api/v2/item/4',
+              method: 'GET'
+            }).done(function(monsterBallRes) { 
+              let doneHtml = 
+              `
+                <p class="name">ゲットしました</p>
+                <div>
+                  <img class="img" src="${monsterBallRes.sprites.default}" alt="モンスターボール">
+                </div>
+                <button class="btn" data-js="reset">戻る</button>
+              `
+              $('#wrapper').html(doneHtml);
+            })
+          } 
 
-      $('#wrapper').on('click', '[data-js="reset"]', reload); 
-      function reload() {
-        location.reload(); 
+      $('#wrapper').on('click', '[data-js="reset"]', reset); 
+      function reset() {
+        let resetHtml = 
+        `
+        <button type="button" class="btn search-btn" id="pokemon_search">ポケモンを探す</button>
+        `
+        $('#wrapper').html(resetHtml);
       }
-    })
+    }
+  })
   </script>
 </body>
 </html>
